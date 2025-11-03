@@ -1,2 +1,0 @@
-/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /tmp_user/juno/sollivie/spectral-diff/runs/test exists and is not empty.
-LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
