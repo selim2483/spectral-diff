@@ -1,0 +1,172 @@
+/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /tmp_user/juno/sollivie/spectral-diff/runs/test exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+tensor(0)
+
+   | Name                            | Type              | Params | Mode  | In sizes                     | Out sizes
+----------------------------------------------------------------------------------------------------------------------------------
+0  | model                           | UNet2DModel       | 15.9 M | train | ?                            | ?
+1  | model.conv_in                   | Conv2d            | 896    | train | ?                            | ?
+2  | model.time_proj                 | Timesteps         | 0      | train | ?                            | ?
+3  | model.time_embedding            | TimestepEmbedding | 20.7 K | train | ?                            | ?
+4  | model.time_embedding.linear_1   | Linear            | 4.2 K  | train | ?                            | ?
+5  | model.time_embedding.act        | SiLU              | 0      | train | ?                            | ?
+6  | model.time_embedding.linear_2   | Linear            | 16.5 K | train | ?                            | ?
+7  | model.down_blocks               | ModuleList        | 3.8 M  | train | ?                            | ?
+8  | model.down_blocks.0             | DownBlock2D       | 54.8 K | train | ?                            | ?
+9  | model.down_blocks.1             | AttnDownBlock2D   | 218 K  | train | ?                            | ?
+10 | model.down_blocks.2             | AttnDownBlock2D   | 839 K  | train | ?                            | ?
+11 | model.down_blocks.3             | AttnDownBlock2D   | 2.7 M  | train | ?                            | ?
+12 | model.up_blocks                 | ModuleList        | 9.4 M  | train | ?                            | ?
+13 | model.up_blocks.0               | AttnUpBlock2D     | 6.9 M  | train | ?                            | ?
+14 | model.up_blocks.1               | AttnUpBlock2D     | 1.9 M  | train | ?                            | ?
+15 | model.up_blocks.2               | AttnUpBlock2D     | 490 K  | train | ?                            | ?
+16 | model.up_blocks.3               | UpBlock2D         | 112 K  | train | ?                            | ?
+17 | model.mid_block                 | UNetMidBlock2D    | 2.7 M  | train | ?                            | ?
+18 | model.mid_block.attentions      | ModuleList        | 263 K  | train | ?                            | ?
+19 | model.mid_block.resnets         | ModuleList        | 2.4 M  | train | ?                            | ?
+20 | model.conv_norm_out             | GroupNorm         | 64     | train | ?                            | ?
+21 | model.conv_act                  | SiLU              | 0      | train | ?                            | ?
+22 | model.conv_out                  | Conv2d            | 867    | train | ?                            | ?
+23 | ema_model                       | EMA               | 15.9 M | train | [[8, 3, 256, 256], []]       | ?
+24 | ema_model.module                | UNet2DModel       | 15.9 M | eval  | [[8, 3, 256, 256], []]       | ?
+25 | ema_model.module.conv_in        | Conv2d            | 896    | eval  | [8, 3, 256, 256]             | [8, 32, 256, 256]
+26 | ema_model.module.time_proj      | Timesteps         | 0      | eval  | [8]                          | [8, 32]
+27 | ema_model.module.time_embedding | TimestepEmbedding | 20.7 K | eval  | [8, 32]                      | [8, 128]
+28 | ema_model.module.down_blocks    | ModuleList        | 3.8 M  | eval  | ?                            | ?
+29 | ema_model.module.up_blocks      | ModuleList        | 9.4 M  | eval  | ?                            | ?
+30 | ema_model.module.mid_block      | UNetMidBlock2D    | 2.7 M  | eval  | [[8, 256, 32, 32], [8, 128]] | [8, 256, 32, 32]
+31 | ema_model.module.conv_norm_out  | GroupNorm         | 64     | eval  | [8, 32, 256, 256]            | [8, 32, 256, 256]
+32 | ema_model.module.conv_act       | SiLU              | 0      | eval  | [8, 32, 256, 256]            | [8, 32, 256, 256]
+33 | ema_model.module.conv_out       | Conv2d            | 867    | eval  | [8, 32, 256, 256]            | [8, 3, 256, 256]
+----------------------------------------------------------------------------------------------------------------------------------
+31.8 M    Trainable params
+0         Non-trainable params
+31.8 M    Total params
+127.135   Total estimated model params size (MB)
+375       Modules in train mode
+374       Modules in eval mode
+Sanity Checking DataLoader 0:   0%|                                                                                                                                                   | 0/1 [00:00<?, ?it/s]tensor(0)
+torch.Size([3, 360, 360]) torch.Size([4, 3, 360, 360])
+samples torch.Size([5, 3, 360, 360])
+log_sp torch.Size([5, 3, 360, 360])
+diff_sp torch.Size([5, 3, 360, 360])
+torch.Size([3, 726, 2898])
+[34m[1mwandb[0m: [33mWARNING[0m Data passed to `wandb.Image` should consist of values in the range [0, 255], image data will be normalized to this range, but behavior will be removed in a future version of wandb.
+/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/plotly/matplotlylib/renderer.py:564: UserWarning:
+
+I found a path object that I don't think is part of a bar chart. Ignoring.
+Epoch 0:   0%|                                                                                                                                                                     | 0/5000 [00:00<?, ?it/s]
+
+/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/fit_loop.py:527: PossibleUserWarning:
+
+Found 374 module(s) in eval mode at the start of training. This may lead to unexpected behavior during training. If this is intentional, you can ignore this warning.
+
+Traceback (most recent call last):
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 68, in <module>
+    cli_main()
+    ~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 65, in cli_main
+    cli = CustomCLI(Diffusion, save_config_kwargs={"overwrite": True})
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 414, in __init__
+    self._run_subcommand(self.subcommand)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 747, in _run_subcommand
+    fn(**fn_kwargs)
+    ~~^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 1011, in _run
+    results = self._run_stage()
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 1055, in _run_stage
+    self.fit_loop.run()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/fit_loop.py", line 216, in run
+    self.advance()
+    ~~~~~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/fit_loop.py", line 458, in advance
+    self.epoch_loop.run(self._data_fetcher)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/training_epoch_loop.py", line 152, in run
+    self.advance(data_fetcher)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/training_epoch_loop.py", line 348, in advance
+    batch_output = self.automatic_optimization.run(trainer.optimizers[0], batch_idx, kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 192, in run
+    self._optimizer_step(batch_idx, closure)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 270, in _optimizer_step
+    call._call_lightning_module_hook(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        trainer,
+        ^^^^^^^^
+    ...<4 lines>...
+        train_step_and_backward_closure,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 177, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/core/module.py", line 1366, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/core/optimizer.py", line 154, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, closure, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/strategies/strategy.py", line 239, in optimizer_step
+    return self.precision_plugin.optimizer_step(optimizer, model=model, closure=closure, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/plugins/precision/precision.py", line 123, in optimizer_step
+    return optimizer.step(closure=closure, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/optim/lr_scheduler.py", line 133, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/optim/optimizer.py", line 517, in wrapper
+    out = func(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/optim/optimizer.py", line 82, in _use_grad
+    ret = func(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/optim/adam.py", line 226, in step
+    loss = closure()
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/plugins/precision/precision.py", line 109, in _wrap_closure
+    closure_result = closure()
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 146, in __call__
+    self._result = self.closure(*args, **kwargs)
+                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 131, in closure
+    step_output = self._step_fn()
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 319, in _training_step
+    training_step_output = call._call_strategy_hook(trainer, "training_step", *kwargs.values())
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 329, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/strategies/strategy.py", line 391, in training_step
+    return self.lightning_module.training_step(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/diffusion/diffusion.py", line 43, in training_step
+    output = self.model(x_noisy, t).sample
+             ~~~~~~~~~~^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/diffusers/models/unets/unet_2d.py", line 337, in forward
+    sample = upsample_block(sample, res_samples, emb)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/diffusers/models/unets/unet_2d_blocks.py", line 2295, in forward
+    hidden_states = torch.cat([hidden_states, res_hidden_states], dim=1)
+RuntimeError: Sizes of tensors must match except in dimension 1. Expected size 24 but got size 23 for tensor number 1 in the list.

@@ -1,0 +1,86 @@
+accelerator: auto
+strategy: auto
+devices: auto
+num_nodes: 1
+precision: null
+logger:
+  class_path: lightning.pytorch.loggers.WandbLogger
+  init_args:
+    name: test
+    save_dir: /tmp_user/juno/sollivie/spectral-diff/runs/test
+    version: null
+    offline: false
+    dir: null
+    id: null
+    anonymous: null
+    project: spectralDiff
+    log_model: false
+    experiment: null
+    prefix: ''
+    checkpoint_name: null
+    entity: null
+    notes: null
+    tags: null
+    config: null
+    config_exclude_keys: null
+    config_include_keys: null
+    allow_val_change: null
+    group: null
+    job_type: null
+    mode: null
+    force: null
+    reinit: null
+    resume: null
+    resume_from: null
+    fork_from: null
+    save_code: null
+    tensorboard: null
+    sync_tensorboard: null
+    monitor_gym: null
+    settings: null
+callbacks: 
+  - class_path: lightning.pytorch.callbacks.ModelSummary
+    init_args:
+      max_depth: 3
+  - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+    init_args:
+      dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/test
+      filename: 'model-{step}'
+      save_last: True
+      every_n_train_steps: 10_000
+      save_top_k: -1
+  - class_path: utils.logging.LogMetricsCallback
+  - class_path: utils.logging.LogImagesSampleCallback
+fast_dev_run: false
+max_epochs: null
+min_epochs: null
+max_steps: 50_000
+min_steps: null
+max_time: null
+limit_train_batches: null
+limit_val_batches: null
+limit_test_batches: null
+limit_predict_batches: null
+overfit_batches: 0.
+val_check_interval: 5_000
+check_val_every_n_epoch: null
+num_sanity_val_steps: null
+log_every_n_steps: null
+enable_checkpointing: null
+enable_progress_bar: null
+enable_model_summary: null
+accumulate_grad_batches: 1
+gradient_clip_val: null
+gradient_clip_algorithm: null
+deterministic: null
+benchmark: null
+inference_mode: true
+use_distributed_sampler: true
+profiler: null
+detect_anomaly: false
+barebones: false
+plugins: null
+sync_batchnorm: false
+reload_dataloaders_every_n_epochs: 0
+default_root_dir: null
+model_registry: null

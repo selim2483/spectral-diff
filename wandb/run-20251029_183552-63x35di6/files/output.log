@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 68, in <module>
+    cli_main()
+    ~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 65, in cli_main
+    cli = CustomCLI(Diffusion)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 414, in __init__
+    self._run_subcommand(self.subcommand)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 747, in _run_subcommand
+    fn(**fn_kwargs)
+    ~~^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 973, in _run
+    call._call_setup_hook(self)  # allow user to set up LightningModule in accelerator environment
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 109, in _call_setup_hook
+    _call_callback_hooks(trainer, "setup", stage=fn)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 228, in _call_callback_hooks
+    fn(trainer, trainer.lightning_module, *args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 271, in setup
+    raise RuntimeError(
+    ...<4 lines>...
+    )
+RuntimeError: SaveConfigCallback expected ./config.yaml to NOT exist. Aborting to avoid overwriting results of a previous run. You can delete the previous config file, set `LightningCLI(save_config_callback=None)` to disable config saving, or set `LightningCLI(save_config_kwargs={"overwrite": True})` to overwrite the config file.

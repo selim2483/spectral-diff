@@ -1,0 +1,59 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Traceback (most recent call last):
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 68, in <module>
+    cli_main()
+    ~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/src/spectral_diff/main.py", line 65, in cli_main
+    cli = CustomCLI(Diffusion)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 414, in __init__
+    self._run_subcommand(self.subcommand)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 747, in _run_subcommand
+    fn(**fn_kwargs)
+    ~~^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 991, in _run
+    call._call_callback_hooks(self, "on_fit_start")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 228, in _call_callback_hooks
+    fn(trainer, trainer.lightning_module, *args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_summary.py", line 64, in on_fit_start
+    model_summary = self._summary(trainer, pl_module)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_summary.py", line 86, in _summary
+    return summarize(pl_module, max_depth=self._max_depth)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 515, in summarize
+    return ModelSummary(lightning_module, max_depth=max_depth)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 217, in __init__
+    self._layer_summary = self.summarize()
+                          ~~~~~~~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 301, in summarize
+    self._forward_example_input()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 334, in _forward_example_input
+    model(input_)
+    ~~~~~^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/core/module.py", line 706, in forward
+    return super().forward(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 399, in _forward_unimplemented
+    raise NotImplementedError(
+        f'Module [{type(self).__name__}] is missing the required "forward" function'
+    )
+NotImplementedError: Module [Diffusion] is missing the required "forward" function

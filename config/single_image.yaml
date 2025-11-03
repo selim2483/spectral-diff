@@ -1,0 +1,12 @@
+class_path: data.SingleImageDataModule
+init_args:
+  image_path: /tmp_user/juno/sollivie/datasets/DeepTextures/tissu.png
+  batch_size: 1
+  num_workers: 1
+  crop_ratio: 0.25
+  val_batch_size: 4
+  bands:
+  - 0
+  - 1
+  - 2
+  center_data: true

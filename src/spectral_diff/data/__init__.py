@@ -1,0 +1,2 @@
+from .augmented_data import AugmentedDataModule
+from .single_image import SingleImageDataModule

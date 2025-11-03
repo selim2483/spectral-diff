@@ -1,0 +1,176 @@
+/tmp_user/juno/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /tmp_user/juno/sollivie/spectral-diff/runs/test exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+tensor(99)
+tensor(98)
+tensor(97)
+tensor(96)
+tensor(95)
+tensor(94)
+tensor(93)
+tensor(92)
+tensor(91)
+tensor(90)
+tensor(89)
+tensor(88)
+tensor(87)
+tensor(86)
+tensor(85)
+tensor(84)
+tensor(83)
+tensor(82)
+tensor(81)
+tensor(80)
+tensor(79)
+tensor(78)
+tensor(77)
+tensor(76)
+tensor(75)
+tensor(74)
+tensor(73)
+tensor(72)
+tensor(71)
+tensor(70)
+tensor(69)
+tensor(68)
+tensor(67)
+tensor(66)
+tensor(65)
+tensor(64)
+tensor(63)
+tensor(62)
+tensor(61)
+tensor(60)
+tensor(59)
+tensor(58)
+tensor(57)
+tensor(56)
+tensor(55)
+tensor(54)
+tensor(53)
+tensor(52)
+tensor(51)
+tensor(50)
+tensor(49)
+tensor(48)
+tensor(47)
+tensor(46)
+tensor(45)
+tensor(44)
+tensor(43)
+tensor(42)
+tensor(41)
+tensor(40)
+tensor(39)
+tensor(38)
+tensor(37)
+tensor(36)
+tensor(35)
+tensor(34)
+tensor(33)
+tensor(32)
+tensor(31)
+tensor(30)
+tensor(29)
+tensor(28)
+tensor(27)
+tensor(26)
+tensor(25)
+tensor(24)
+tensor(23)
+tensor(22)
+tensor(21)
+tensor(20)
+tensor(19)
+tensor(18)
+tensor(17)
+tensor(16)
+tensor(15)
+tensor(14)
+tensor(13)
+tensor(12)
+tensor(11)
+tensor(10)
+tensor(9)
+tensor(8)
+tensor(7)
+tensor(6)
+tensor(5)
+tensor(4)
+tensor(3)
+tensor(2)
+tensor(1)
+tensor(0)
+
+   | Name                            | Type              | Params | Mode  | In sizes                     | Out sizes
+-----------------------------------------------------------------------------------------------------------------------------------
+0  | model                           | UNet2DModel       | 274 M  | train | ?                            | ?
+1  | model.conv_in                   | Conv2d            | 6.3 K  | train | ?                            | ?
+2  | model.time_proj                 | Timesteps         | 0      | train | ?                            | ?
+3  | model.time_embedding            | TimestepEmbedding | 1.0 M  | train | ?                            | ?
+4  | model.time_embedding.linear_1   | Linear            | 201 K  | train | ?                            | ?
+5  | model.time_embedding.act        | SiLU              | 0      | train | ?                            | ?
+6  | model.time_embedding.linear_2   | Linear            | 803 K  | train | ?                            | ?
+7  | model.down_blocks               | ModuleList        | 73.2 M | train | ?                            | ?
+8  | model.down_blocks.0             | DownBlock2D       | 2.7 M  | train | ?                            | ?
+9  | model.down_blocks.1             | AttnDownBlock2D   | 10.6 M | train | ?                            | ?
+10 | model.down_blocks.2             | AttnDownBlock2D   | 24.1 M | train | ?                            | ?
+11 | model.down_blocks.3             | AttnDownBlock2D   | 35.7 M | train | ?                            | ?
+12 | model.up_blocks                 | ModuleList        | 166 M  | train | ?                            | ?
+13 | model.up_blocks.0               | AttnUpBlock2D     | 87.1 M | train | ?                            | ?
+14 | model.up_blocks.1               | AttnUpBlock2D     | 50.6 M | train | ?                            | ?
+15 | model.up_blocks.2               | AttnUpBlock2D     | 22.9 M | train | ?                            | ?
+16 | model.up_blocks.3               | UpBlock2D         | 5.5 M  | train | ?                            | ?
+17 | model.mid_block                 | UNetMidBlock2D    | 33.7 M | train | ?                            | ?
+18 | model.mid_block.attentions      | ModuleList        | 3.2 M  | train | ?                            | ?
+19 | model.mid_block.resnets         | ModuleList        | 30.5 M | train | ?                            | ?
+20 | model.conv_norm_out             | GroupNorm         | 448    | train | ?                            | ?
+21 | model.conv_act                  | SiLU              | 0      | train | ?                            | ?
+22 | model.conv_out                  | Conv2d            | 6.1 K  | train | ?                            | ?
+23 | ema_model                       | EMA               | 274 M  | train | [[8, 3, 256, 256], []]       | ?
+24 | ema_model.module                | UNet2DModel       | 274 M  | eval  | [[8, 3, 256, 256], []]       | ?
+25 | ema_model.module.conv_in        | Conv2d            | 6.3 K  | eval  | [8, 3, 256, 256]             | [8, 224, 256, 256]
+26 | ema_model.module.time_proj      | Timesteps         | 0      | eval  | [8]                          | [8, 224]
+27 | ema_model.module.time_embedding | TimestepEmbedding | 1.0 M  | eval  | [8, 224]                     | [8, 896]
+28 | ema_model.module.down_blocks    | ModuleList        | 73.2 M | eval  | ?                            | ?
+29 | ema_model.module.up_blocks      | ModuleList        | 166 M  | eval  | ?                            | ?
+30 | ema_model.module.mid_block      | UNetMidBlock2D    | 33.7 M | eval  | [[8, 896, 32, 32], [8, 896]] | [8, 896, 32, 32]
+31 | ema_model.module.conv_norm_out  | GroupNorm         | 448    | eval  | [8, 224, 256, 256]           | [8, 224, 256, 256]
+32 | ema_model.module.conv_act       | SiLU              | 0      | eval  | [8, 224, 256, 256]           | [8, 224, 256, 256]
+33 | ema_model.module.conv_out       | Conv2d            | 6.1 K  | eval  | [8, 224, 256, 256]           | [8, 3, 256, 256]
+-----------------------------------------------------------------------------------------------------------------------------------
+548 M     Trainable params
+0         Non-trainable params
+548 M     Total params
+2,192.449 Total estimated model params size (MB)
+375       Modules in train mode
+374       Modules in eval mode
+Sanity Checking DataLoader 0:   0%|                                                                                                                                                   | 0/1 [00:00<?, ?it/s]torch.Size([4, 3, 360, 360])
+tensor(99)
+tensor(98)
+tensor(97)
+tensor(96)
+tensor(95)
+tensor(94)
+tensor(93)
+tensor(92)
+tensor(91)
+tensor(90)
+tensor(89)
+tensor(88)
+tensor(87)
+tensor(86)
+tensor(85)
+tensor(84)
+tensor(83)
+tensor(82)
+tensor(81)
+tensor(80)
+tensor(79)
+tensor(78)
+tensor(77)
+tensor(76)
+tensor(75)
+tensor(74)
+tensor(73)
+tensor(72)
+tensor(71)
