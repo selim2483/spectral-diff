@@ -219,6 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-runs
-wandb
+runs/
+wandb/
 
