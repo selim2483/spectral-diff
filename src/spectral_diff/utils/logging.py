@@ -220,12 +220,18 @@ def log_random_frame(
 @register_logging
 def plot_vertical_profile(
         target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
-    profiles = image.mean(dim=(-1,-2)).cpu()
+    target_profiles = target.mean(dim=(-1,-2)).cpu()
+    sample_profiles = sample.mean(dim=(-1,-2)).cpu()
 
+    colors = plt.cm.tab10
     fig, ax = plt.subplots(
         1, 1, figsize=options.plt_kwargs.get('figsize', (10, 10)))
-    for i, profile in enumerate(profiles):
-        ax.plot(profile, label=f'{label} {i}')
+    for i in enumerate(target_profiles.shape[0]):
+        c = colors(i % 10)
+        ax.plot(
+            target_profiles[i], label=f'target {i}', linestyle='-', color=c)
+        ax.plot(
+            sample_profiles[i], label=f'sample {i}', linestyle='-', color=c)
 
     ax.legend()
     ax.grid(True)
@@ -237,14 +243,11 @@ def plot_vertical_profile(
     return fig
 
 @register_logging
-def make_animation(image: torch.Tensor):
+def make_animation(
+        target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     grid = make_grid(
         image, nrow=image[0].shape[0], normalize=True, value_range=(-1,1))
     grid.squeeze_().unsqueeze_(1)
-
-video_viz = {
-    'random_slice': 
-}
 
 class LogVideoSampleCallback(Callback):
 
