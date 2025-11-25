@@ -20,6 +20,7 @@ class LoggingOptions:
     loggings: list = field(default_factory=list)
     image_viz: Sequence[str] = field(
         default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
+    gif_fps: int = 4
     plt_kwargs: Sequence[int] = field(default_factory=dict)
     # video_viz: Sequence[str] = field(
     #     default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
@@ -27,7 +28,7 @@ class LoggingOptions:
 DEFAULT_IMAGE_LOGGING_OPTIONS = LoggingOptions(
     loggings=['make_grid_image', 'plot_radiale_profile'])
 DEFAULT_VIDEO_LOGGING_OPTIONS = LoggingOptions(
-    loggings=['random_slice'])
+    loggings=['random_slice', 'plot_vertical_profile', 'make_animation'])
 DEFAULT_IMAGES_TO_SHOW = ['samples', 'log_sp', 'diff_sp']
 DEFAULT_METRICS_OPTIONS = MetricsOptions(
     metrics=[
@@ -37,7 +38,6 @@ DEFAULT_METRICS_OPTIONS = MetricsOptions(
         'gradients_distance'
     ]
 )
-DEFAULT_VIDEO_VIZ = ['random_slice', 'z_profile', 'animation']
 
 # -------------------------------------------------------------------------- #
 
@@ -214,7 +214,9 @@ class LogImagesSampleCallback(Callback):
 def log_random_frame(
         target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     idx = random.randint(1,target.shape[1])
-    grid = make_grid_image(target[:,idx,:,:], sample[:,idx,:,:], options)
+    target_frame = target[:,idx,:,:].unsqueeze(1)
+    sample_frame = sample[:,idx,:,:].unsqueeze(1)
+    grid = make_grid_image(target_frame, sample_frame, options)
     return {'random slice samples': grid[:,idx,:,:]}
 
 @register_logging
@@ -246,21 +248,18 @@ def plot_vertical_profile(
 def make_animation(
         target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     grid = make_grid(
-        image, nrow=image[0].shape[0], normalize=True, value_range=(-1,1))
-    grid.squeeze_().unsqueeze_(1)
+        torch.cat([target, sample]), 
+        nrow=target.shape[0], normalize=True, value_range=(-1,1))
+    video = wandb.Video(
+        grid.unsqueeze(1).cpu().numpy(), fps=options.gif_fps, format="gif")
+    return {'animation': video}
 
-class LogVideoSampleCallback(Callback):
+class LogVideoSampleCallback(LogImagesSampleCallback):
 
-    def __init__(self, video_viz: Sequence[str] = DEFAULT_VIDEO_VIZ):
+    def __init__(
+            self, options: LoggingOptions = DEFAULT_VIDEO_LOGGING_OPTIONS):
         super().__init__()
-
-    def on_validation_batch_end(
-            self, trainer: Trainer, pl_module: LightningModule, 
-            outputs: dict, batch: dict, batch_idx: int, 
-            dataloader_idx: int = 0):
-        
-        target = batch.get('images')
-        sample = outputs.get('sample')
+        self.options = options
 
 # -------------------------------- Metrics --------------------------------- #
 
