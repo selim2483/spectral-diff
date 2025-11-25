@@ -1,0 +1,6 @@
+class_path: data.CloudyDataModule
+init_args:
+  root: /tmp_user/juno/sollivie/datasets/cloudy
+  nframes: 10
+  batch_size: 1
+  num_workers: 1

@@ -214,7 +214,11 @@ class LogImagesSampleCallback(Callback):
 def log_random_frame(
         target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     idx = random.randint(1,target.shape[1])
-    grid = make_grid_image(target[:,idx,:,:], sample[:,idx,:,:], options)
+    grid = make_grid_image(
+        target[:,idx,:,:].unsqueeze(1), 
+        sample[:,idx,:,:].unsqueeze(1), 
+        options
+    )
     return {'random slice samples': grid[:,idx,:,:]}
 
 @register_logging
