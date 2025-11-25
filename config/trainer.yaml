@@ -6,8 +6,8 @@ precision: null
 logger:
   class_path: lightning.pytorch.loggers.WandbLogger
   init_args:
-    name: test
-    save_dir: /tmp_user/juno/sollivie/spectral-diff/runs/test
+    name: tissu
+    save_dir: /tmp_user/juno/sollivie/spectral-diff/runs/tissu
     version: null
     offline: false
     dir: null
@@ -44,7 +44,7 @@ callbacks:
       max_depth: 3
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/test
+      dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/tissu
       filename: 'model-{step}'
       save_last: True
       every_n_train_steps: 10_000

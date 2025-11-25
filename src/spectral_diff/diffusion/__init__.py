@@ -1,1 +1,2 @@
 from .diffusion import Diffusion
+from .conditionnal_diffusion import ConditionalDiffusion

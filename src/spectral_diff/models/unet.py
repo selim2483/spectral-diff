@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional, Sequence
 from diffusers.models.modeling_utils import ModelMixin
 from diffusers.configuration_utils import ConfigMixin, register_to_config
 from diffusers.utils import BaseOutput
@@ -28,11 +29,11 @@ class UNet(ModelMixin, ConfigMixin):
     @register_to_config
     def __init__(
         self,
-        dim,
-        out_dim = None,
-        dim_mults=(1, 2, 4, 8),
-        channels = 3,
-        with_time_emb = True
+        dim: int,
+        out_dim: Optional[int] = None,
+        dim_mults: Optional[Sequence[int]]=(1, 2, 4, 8),
+        channels: Optional[int] = 3,
+        with_time_emb: Optional[bool] = True
     ):
         super().__init__()
 
@@ -86,10 +87,22 @@ class UNet(ModelMixin, ConfigMixin):
             torch.nn.Conv2d(dim, out_dim, 1)
         )
 
-    def forward(self, x: torch.Tensor, t: int):
-        t_tensor = torch.full(
-            (x.size(0),), t, dtype=torch.int64, device=x.device)
-        t = self.time_mlp(t_tensor) if exists(self.time_mlp) else None
+    def forward(self, x: torch.Tensor, timestep: int):
+
+        # 1. time
+        timesteps = timestep
+        if not torch.is_tensor(timesteps):
+            timesteps = torch.tensor(
+                [timesteps], dtype=torch.long, device=x.device)
+        elif torch.is_tensor(timesteps) and len(timesteps.shape) == 0:
+            timesteps = timesteps[None].to(x.device)
+
+        # broadcast to batch dimension in a way that's compatible with 
+        # ONNX/Core ML
+        timesteps = timesteps * torch.ones(
+            x.shape[0], dtype=timesteps.dtype, device=timesteps.device)
+        
+        t = self.time_mlp(timesteps) if exists(self.time_mlp) else None
         initial_shape = x.shape[-2:]
         h = []
 
@@ -112,4 +125,6 @@ class UNet(ModelMixin, ConfigMixin):
             x = attn(x)
             x = upsample(x)
 
-        return self.final_conv(resize(x, out_shape=initial_shape))
+        sample = self.final_conv(resize(x, out_shape=initial_shape))
+        
+        return UNet2DOutput(sample=sample)

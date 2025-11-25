@@ -1,13 +1,13 @@
-class_path: diffusers.DDPMScheduler
+class_path: diffusion.schedulers.DDPMScheduler
 init_args:
-  num_train_timesteps: 1
+  num_train_timesteps: 100
   beta_start: 0.0001
   beta_end: 0.02
   beta_schedule: linear
   trained_betas: null
   variance_type: fixed_small
   clip_sample: true
-  prediction_type: epsilon
+  prediction_type: sample
   thresholding: false
   dynamic_thresholding_ratio: 0.995
   clip_sample_range: 1.0

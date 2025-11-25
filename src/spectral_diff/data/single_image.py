@@ -2,7 +2,7 @@ from pathlib import Path
 import random
 from typing import Sequence
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, IterableDataset, DataLoader
 from torchvision.transforms import transforms
 from lightning.pytorch import LightningDataModule
 
@@ -15,7 +15,7 @@ SAMPLE_EVERY_N_STEP = 1000
 VALIDATION_BATCH_SIZE = 4
 BANDS = list(range(3))
 
-class CropSet(Dataset):
+class CropSet(IterableDataset):
     """
     A dataset comprised of crops of a single image or several images.
     """
@@ -38,6 +38,8 @@ class CropSet(Dataset):
                 to avoid overhead from pytorch_lightning.
         """
         self.crop_size = int(min(image[0].shape[-2:]) * crop_ratio)
+        self.crop_size = int(self.crop_size / 2**3) * 2**3
+        print('crop_size', self.crop_size)
         self.dataset_size = dataset_size
 
         transform_list = [transforms.RandomHorizontalFlip()] if use_flip else []
@@ -54,16 +56,17 @@ class CropSet(Dataset):
             self.mean = torch.zeros_like(image.squeeze(0))
             
         self.img = image - self.mean
-
-    def __len__(self):
-        return self.dataset_size
-
-    def __getitem__(self, item):
+        
+    def __iter__(self):
         # If the training is multi-image, choose one of them to get
         # the crop from
-        img = self.img if len(self.img.shape) == 3 else random.choice(self.img)
-        img_crop = self.transform(img)
-        return {'images': img_crop, 'mean': self.mean}
+        def next_crop():
+            while True:
+                img = self.img if len(self.img.shape) == 3 else random.choice(self.img)
+                img_crop = self.transform(img)
+                yield {'images': img_crop, 'mean': self.mean}
+
+        return iter(next_crop())
     
 class SingleSet(Dataset):
     """
@@ -126,7 +129,7 @@ class SingleImageDataModule(LightningDataModule):
             dataset_size=train_size, center_data=self.hparams.center_data)
         return DataLoader(
             train_dataset, batch_size=self.hparams.batch_size, 
-            num_workers=self.hparams.num_workers, shuffle=True, pin_memory=True)
+            num_workers=self.hparams.num_workers, pin_memory=True)
 
     def val_dataloader(self):
         val_dataset = SingleSet(

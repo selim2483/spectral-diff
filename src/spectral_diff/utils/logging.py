@@ -1,6 +1,8 @@
+from dataclasses import dataclass, field
 from math import ceil
 import os
-from typing import Sequence, Optional
+import random
+from typing import Callable, Sequence, Optional
 
 import torch
 from torchvision.utils import make_grid
@@ -13,6 +15,19 @@ from lightning.pytorch.callbacks import Callback, ModelCheckpoint
 from texture_metrics.criteria.fourier import radial_profile
 from metrics import _metric_dict, MetricsOptions
 
+@dataclass
+class LoggingOptions:
+    loggings: list = field(default_factory=list)
+    image_viz: Sequence[str] = field(
+        default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
+    plt_kwargs: Sequence[int] = field(default_factory=dict)
+    # video_viz: Sequence[str] = field(
+    #     default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
+
+DEFAULT_IMAGE_LOGGING_OPTIONS = LoggingOptions(
+    loggings=['make_grid_image', 'plot_radiale_profile'])
+DEFAULT_VIDEO_LOGGING_OPTIONS = LoggingOptions(
+    loggings=['random_slice'])
 DEFAULT_IMAGES_TO_SHOW = ['samples', 'log_sp', 'diff_sp']
 DEFAULT_METRICS_OPTIONS = MetricsOptions(
     metrics=[
@@ -22,6 +37,24 @@ DEFAULT_METRICS_OPTIONS = MetricsOptions(
         'gradients_distance'
     ]
 )
+DEFAULT_VIDEO_VIZ = ['random_slice', 'z_profile', 'animation']
+
+# -------------------------------------------------------------------------- #
+
+_logging_dict = dict()
+
+def is_valid_logging(logging):
+    return logging in _logging_dict
+
+def list_valid_loggings():
+    return list(_logging_dict.keys())
+
+def register_logging(func: Callable):
+    assert callable(func)
+    _logging_dict[func.__name__] = func
+    
+    return func
+# --------------------------------- Image ---------------------------------- #
 
 def to_batch_format(tensor: torch.Tensor, ndim=4):
     if tensor.ndim == ndim:
@@ -77,7 +110,6 @@ def imlog(tensor: torch.Tensor, logger: str = 'wandb'):
 def make_grid_single_image(
         target: torch.Tensor, sample: torch.Tensor, 
         images_to_show: Sequence[str] = DEFAULT_IMAGES_TO_SHOW):
-    print(target.shape, sample.shape)
     target.unsqueeze_(0)
     imgs = {}
     if 'samples' in images_to_show:
@@ -87,7 +119,7 @@ def make_grid_single_image(
     if 'log_sp' in images_to_show:
         imgs['sp_t'] = logsp(target)
         imgs['log_sp'] = torch.cat([imgs['sp_t'], logsp(sample)])
-        imgs['log_sp'] += imgs['log_sp'].min()
+        # imgs['log_sp'] += imgs['log_sp'].min()
         if 'diff_sp' in images_to_show:
             imgs['diff_sp'] = (imgs['log_sp'] - imgs['sp_t']).abs()
 
@@ -96,22 +128,14 @@ def make_grid_single_image(
         if key not in ['log_sp', 'diff_sp'] 
         else fourier_colormap(
             imgs[key], 
-            vmin=0 if key=='log_sp' else None, 
-            vmax=imgs['log_sp'].max() if key=='log_sp' else None) 
+            vmin=0 if key=='diff_sp' else None, 
+            vmax=imgs['log_sp'].max() if key=='diff_sp' else None) 
         for key in images_to_show
     ]
 
-    for key in images_to_show:
-        print(key, imgs[key].shape 
-              if key not in ['log_sp', 'diff_sp'] 
-              else fourier_colormap(
-                  imgs[key], 
-                  vmin=0 if key=='log_sp' else None, 
-                  vmax=imgs['log_sp'].max() if key=='log_sp' else None).shape)
-
     grid = torch.cat(tensors)
-    grid = make_grid(grid)
-    print(grid.shape)
+    grid = make_grid(
+        grid, nrow=tensors[0].shape[0], normalize=True, value_range=(-1,1))
     grid = imlog(grid)
 
     return {'samples': grid}
@@ -121,22 +145,26 @@ def make_grid_multiple_images(
         images_to_show: Sequence[str] = DEFAULT_IMAGES_TO_SHOW):
     raise NotImplementedError
 
+@register_logging
 def make_grid_image(
-        target: torch.Tensor, sample: torch.Tensor, 
-        images_to_show: Sequence[str] = DEFAULT_IMAGES_TO_SHOW):
+        target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     target, sample = target.cpu(), sample.cpu()
     if target.ndim == 3 or target.size(0) == 1:
-        return make_grid_single_image(target.squeeze(), sample, images_to_show)
+        return make_grid_single_image(
+            target.squeeze(), sample, options.image_viz)
     elif torch.all(target == target[0]):
-        return make_grid_single_image(target[0], sample, images_to_show)
+        return make_grid_single_image(target[0], sample, options.image_viz)
     else:
-        return make_grid_multiple_images(target, sample, images_to_show)
-    
-def plot_radial_profile(target: torch.Tensor, sample: torch.Tensor, **kwargs):
+        return make_grid_multiple_images(target, sample, options.image_viz)
+
+@register_logging
+def plot_radial_profile(
+        target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
     tensors = torch.cat([to_batch_format(target), to_batch_format(sample)])
     profiles = radial_profile(tensors.mean(dim=-3)).cpu()
 
-    fig, ax = plt.subplots(1, 1, figsize=kwargs.get('figsize', (10, 10)))
+    fig, ax = plt.subplots(
+        1, 1, figsize=options.plt_kwargs.get('figsize', (10, 10)))
     for i, profile in enumerate(profiles):
         ax.plot(profile, label='target' if i==0 else f'sample {i}')
 
@@ -146,9 +174,10 @@ def plot_radial_profile(target: torch.Tensor, sample: torch.Tensor, **kwargs):
     ax.set_ylabel('Fourier spectrum')
     ax.set_xscale('log')
     ax.set_yscale('log')
+    ax.set_title('Fourier Spectrum Radial Profile')
 
     plt.tight_layout()
-    return fig
+    return {'Radial Spectrum' : fig}
 
 def log_metric_summary(
         pl_module: LightningModule, name: str, value: torch.Tensor):
@@ -162,11 +191,9 @@ def log_metric_summary(
 class LogImagesSampleCallback(Callback):
 
     def __init__(
-            self, images_to_show: Sequence[str] = DEFAULT_IMAGES_TO_SHOW, 
-            radial_profile = True):
+            self, options: LoggingOptions = DEFAULT_IMAGE_LOGGING_OPTIONS):
         super().__init__()
-        self.images_to_show = images_to_show
-        self.radial_profile = radial_profile
+        self.options = options
 
     def on_validation_batch_end(
             self, trainer: Trainer, pl_module: LightningModule, 
@@ -177,13 +204,62 @@ class LogImagesSampleCallback(Callback):
         target = batch.get('images') + mu
         sample = outputs.get('sample') + mu
 
-        grids = make_grid_image(
-            target, sample, images_to_show=self.images_to_show)
-        trainer.logger.experiment.log(grids)
+        for logging in self.options.loggings:
+            output = _logging_dict[logging](target, sample, self.options)
+            trainer.logger.experiment.log(output, step=trainer.global_step)
 
-        if self.radial_profile:
-            profile_plot = plot_radial_profile(target, sample)
-            trainer.logger.experiment.log({'Radial Spectrum' : profile_plot})
+# --------------------------------- Video ---------------------------------- #
+
+@register_logging
+def log_random_frame(
+        target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
+    idx = random.randint(1,target.shape[1])
+    grid = make_grid_image(target[:,idx,:,:], sample[:,idx,:,:], options)
+    return {'random slice samples': grid[:,idx,:,:]}
+
+@register_logging
+def plot_vertical_profile(
+        target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
+    profiles = image.mean(dim=(-1,-2)).cpu()
+
+    fig, ax = plt.subplots(
+        1, 1, figsize=options.plt_kwargs.get('figsize', (10, 10)))
+    for i, profile in enumerate(profiles):
+        ax.plot(profile, label=f'{label} {i}')
+
+    ax.legend()
+    ax.grid(True)
+    ax.set_xlabel(r'$z$')
+    ax.set_ylabel('Water content')
+    ax.set_title('Vertical profile')
+    plt.tight_layout()
+
+    return fig
+
+@register_logging
+def make_animation(image: torch.Tensor):
+    grid = make_grid(
+        image, nrow=image[0].shape[0], normalize=True, value_range=(-1,1))
+    grid.squeeze_().unsqueeze_(1)
+
+video_viz = {
+    'random_slice': 
+}
+
+class LogVideoSampleCallback(Callback):
+
+    def __init__(self, video_viz: Sequence[str] = DEFAULT_VIDEO_VIZ):
+        super().__init__()
+
+    def on_validation_batch_end(
+            self, trainer: Trainer, pl_module: LightningModule, 
+            outputs: dict, batch: dict, batch_idx: int, 
+            dataloader_idx: int = 0):
+        
+        target = batch.get('images')
+        sample = outputs.get('sample')
+
+# -------------------------------- Metrics --------------------------------- #
 
 class LogMetricsCallback(Callback):
 
@@ -203,28 +279,3 @@ class LogMetricsCallback(Callback):
         for metric in self.options.metrics:
             value = _metric_dict[metric](target, sample, self.options)
             log_metric_summary(pl_module, metric, value)
-
-def generate_unique_paths(logdir:str, logname:str):
-    i = 0
-    while(True):
-        run_name = f'{logname}_{i:03}'
-        if not os.path.isdir(os.path.join(logdir, run_name)) :
-            return run_name
-        i = i + 1
-        
-
-class CustomModelCheckpoint(ModelCheckpoint):
-    def __init__(
-            self, root = None, dirname = None, filename = None, monitor = None, 
-            verbose = False, save_last = None, save_top_k = 1, 
-            save_on_exception = False, save_weights_only = False, 
-            mode = "min", auto_insert_metric_name = True, 
-            every_n_train_steps = None, train_time_interval = None, 
-            every_n_epochs = None, save_on_train_epoch_end = None, 
-            enable_version_counter = True):
-        
-        super().__init__(
-            dirpath, filename, monitor, verbose, save_last, save_top_k, 
-            save_on_exception, save_weights_only, mode, 
-            auto_insert_metric_name, every_n_train_steps, train_time_interval,
-            every_n_epochs, save_on_train_epoch_end, enable_version_counter)

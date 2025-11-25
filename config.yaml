@@ -142,70 +142,72 @@ trainer:
   default_root_dir: null
   model_registry: null
 model:
-  model:
-    class_path: diffusers.UNet2DModel
-    init_args:
-      sample_size: 256
-      in_channels: 3
-      out_channels: 3
-      center_input_sample: false
-      time_embedding_type: positional
-      time_embedding_dim: null
-      freq_shift: 0
-      flip_sin_to_cos: true
-      down_block_types:
-      - DownBlock2D
-      - AttnDownBlock2D
-      - AttnDownBlock2D
-      - AttnDownBlock2D
-      mid_block_type: UNetMidBlock2D
-      up_block_types:
-      - AttnUpBlock2D
-      - AttnUpBlock2D
-      - AttnUpBlock2D
-      - UpBlock2D
-      block_out_channels:
-      - 224
-      - 448
-      - 672
-      - 896
-      layers_per_block: 2
-      mid_block_scale_factor: 1.0
-      downsample_padding: 1
-      downsample_type: conv
-      upsample_type: conv
-      dropout: 0.0
-      act_fn: silu
-      attention_head_dim: 8
-      norm_num_groups: 32
-      attn_norm_num_groups: null
-      norm_eps: 1.0e-05
-      resnet_time_scale_shift: default
-      add_attention: true
-      class_embed_type: null
-      num_class_embeds: null
-      num_train_timesteps: null
-  scheduler:
-    class_path: diffusers.DDPMScheduler
-    init_args:
-      num_train_timesteps: 1000
-      beta_start: 0.0001
-      beta_end: 0.02
-      beta_schedule: linear
-      trained_betas: null
-      variance_type: fixed_small
-      clip_sample: true
-      prediction_type: epsilon
-      thresholding: false
-      dynamic_thresholding_ratio: 0.995
-      clip_sample_range: 1.0
-      sample_max_value: 1.0
-      timestep_spacing: leading
-      steps_offset: 0
-      rescale_betas_zero_snr: false
-  ema_beta: 0.999
-  initial_lr: 2.0e-05
-  prediction: x0
+  class_path: diffusion.diffusion.Diffusion
+  init_args:
+    model:
+      class_path: diffusers.UNet2DModel
+      init_args:
+        sample_size: 256
+        in_channels: 3
+        out_channels: 3
+        center_input_sample: false
+        time_embedding_type: positional
+        time_embedding_dim: null
+        freq_shift: 0
+        flip_sin_to_cos: true
+        down_block_types:
+        - DownBlock2D
+        - AttnDownBlock2D
+        - AttnDownBlock2D
+        - AttnDownBlock2D
+        mid_block_type: UNetMidBlock2D
+        up_block_types:
+        - AttnUpBlock2D
+        - AttnUpBlock2D
+        - AttnUpBlock2D
+        - UpBlock2D
+        block_out_channels:
+        - 224
+        - 448
+        - 672
+        - 896
+        layers_per_block: 2
+        mid_block_scale_factor: 1.0
+        downsample_padding: 1
+        downsample_type: conv
+        upsample_type: conv
+        dropout: 0.0
+        act_fn: silu
+        attention_head_dim: 8
+        norm_num_groups: 32
+        attn_norm_num_groups: null
+        norm_eps: 1.0e-05
+        resnet_time_scale_shift: default
+        add_attention: true
+        class_embed_type: null
+        num_class_embeds: null
+        num_train_timesteps: null
+    scheduler:
+      class_path: diffusion.schedulers.DDPMScheduler
+      init_args:
+        num_train_timesteps: 1000
+        beta_start: 0.0001
+        beta_end: 0.02
+        beta_schedule: linear
+        trained_betas: null
+        variance_type: fixed_small
+        clip_sample: true
+        prediction_type: epsilon
+        thresholding: false
+        dynamic_thresholding_ratio: 0.995
+        clip_sample_range: 1.0
+        sample_max_value: 1.0
+        timestep_spacing: leading
+        steps_offset: 0
+        rescale_betas_zero_snr: false
+    ema_beta: 0.999
+    initial_lr: 2.0e-05
+    prediction: x0
 data:
   class_path: data.SingleImageDataModule
   init_args:
