@@ -221,4 +221,5 @@ __marimo__/
 
 runs/
 wandb/
+.vscode/
 
