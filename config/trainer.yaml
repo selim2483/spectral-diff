@@ -6,8 +6,8 @@ precision: null
 logger:
   class_path: lightning.pytorch.loggers.WandbLogger
   init_args:
-    name: cloudy_video
-    save_dir: /scratchm/sollivie/spectral-diff/runs/cloudy_video
+    name: cloudy_video_lr1e-5
+    save_dir: /tmp_user/juno/sollivie/spectral-diff/runs/cloudy_video_lr1e-5
     version: null
     offline: false
     dir: null
@@ -44,7 +44,7 @@ callbacks:
       max_depth: 3
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /scratchm/sollivie/spectral-diff/runs/cloudy_video
+      dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/cloudy_video_lr1e-5
       filename: 'model-{step}'
       save_last: True
       every_n_train_steps: 10_000
