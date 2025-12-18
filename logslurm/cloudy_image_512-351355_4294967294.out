@@ -1,0 +1,70 @@
+==========================================
+SLURM_JOB_ID = 351355
+SLURM_JOB_NODELIST = g311
+==========================================
+Fri Nov 28 11:42:47 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.144.03             Driver Version: 550.144.03     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Quadro RTX 6000                On  |   00000000:37:00.0 Off |                  Off |
+| 33%   37C    P8             31W /  260W |       1MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  Quadro RTX 6000                On  |   00000000:86:00.0 Off |                  Off |
+| 33%   36C    P8             30W /  260W |   18048MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  Quadro RTX 6000                On  |   00000000:D8:00.0 Off |                  Off |
+| 35%   31C    P8             11W /  260W |       1MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    1   N/A  N/A    274863      C   python                                      18044MiB |
++-----------------------------------------------------------------------------------------+
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mcloudy_image_512[0m at: [34m[0m
+[1;34mwandb[0m: Find logs at: [1;35mruns/cloudy_image_512/wandb/run-20251128_114307-6pjzfp4k/logs[0m
+
+-----------------------------------------------------
+Command=/scratchm/sollivie/spectral-diff/job.sbatch
+-----------------------------------------------------
+#!/bin/bash 
+
+#SBATCH --job-name=cloudy_image_512
+
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --time=7-0:00:00
+#SBATCH --qos=co_long_gpu
+#SBATCH --output=logslurm/cloudy_image_512-%A_%a.out
+#SBATCH --error=logslurm/cloudy_image_512-%A_%a.err
+#SBATCH --constraint=rtx6000
+
+nvidia-smi
+pixi run python src/spectral_diff/image.py fit --trainer config/trainer_image.yaml --model.model config/unet.yaml --model.scheduler config/ddpm.yaml --data config/cloudy_image.yaml --model.initial_lr 0.0001 --trainer.val_check_interval 5000
+-----------------------------------------------------
+StartTime=2025-11-28T11:42:41
+EndTime=2025-11-28T11:43:13
+NodeList=g311
+-----------------------------------------------------
+Job ID: 351355
+Cluster: commun
+User/Group: sollivie/dota
+State: FAILED (exit code 1)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:12
+CPU Efficiency: 4.69% of 00:04:16 core-walltime
+Job Wall-clock time: 00:00:32
+Memory Utilized: 0.00 MB (estimated maximum)
+Memory Efficiency: 0.00% of 37.66 GB (4.71 GB/core)
+-----------------------------------------------------

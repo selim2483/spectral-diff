@@ -1,0 +1,7 @@
+class_path: models.unet.UNet
+init_args:
+  dim: 64
+  out_dim: 1
+  dim_mults: [1,2,4,8]
+  channels: 1
+  with_time_emb: True

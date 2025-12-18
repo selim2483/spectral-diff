@@ -1,0 +1,20 @@
+  0%|          | 0/112 [00:00<?, ?it/s]/scratchm/sollivie/spectral-diff/src/spectral_diff/extract_ms_dataset.py:12: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.cpp:1581.)
+  data = torch.frombuffer(f.read(), dtype=torch.float32)
+  0%|          | 0/112 [00:07<?, ?it/s]
+Traceback (most recent call last):
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/extract_ms_dataset.py", line 15, in <module>
+    torch.save(data, torch_path)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/serialization.py", line 966, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+         ~~~~~~~~~~~~~~~~~~~~^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/serialization.py", line 828, in _open_zipfile_writer
+    return container(name_or_buffer)  # type: ignore[arg-type]
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/serialization.py", line 792, in __init__
+    torch._C.PyTorchFileWriter(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.name, get_crc32_options(), _get_storage_alignment()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Parent directory /scratchm/sollivie/datasets/hytexila/ms does not exist.

@@ -1,0 +1,38 @@
+==========================================
+SLURM_JOB_ID = 353200
+SLURM_JOB_NODELIST = n213
+==========================================
+
+-----------------------------------------------------
+Command=/scratchm/sollivie/spectral-diff/job2.sbatch
+-----------------------------------------------------
+#!/bin/bash 
+
+#SBATCH --job-name=extract
+
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=9
+#SBATCH --mem=0
+#SBATCH --time=7-0:00:00
+#SBATCH --qos=co_long_std
+#SBATCH --output=logslurm/extract-%A_%a.out
+#SBATCH --error=logslurm/extract-%A_%a.err
+
+pixi run python src/spectral_diff/extract_ms_dataset.py
+-----------------------------------------------------
+StartTime=2025-12-05T14:49:11
+EndTime=2025-12-05T15:17:25
+NodeList=n213
+-----------------------------------------------------
+Job ID: 353200
+Cluster: commun
+User/Group: sollivie/dota
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 9
+CPU Utilized: 00:06:05
+CPU Efficiency: 2.39% of 04:14:06 core-walltime
+Job Wall-clock time: 00:28:14
+Memory Utilized: 62.82 GB
+Memory Efficiency: 33.37% of 188.28 GB
+-----------------------------------------------------

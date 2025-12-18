@@ -1,0 +1,8 @@
+class_path: data.CloudyImageDataModule
+init_args:
+  root: /scratchm/sollivie/datasets/cloudy
+  batch_size: 8
+  num_workers: 8
+  crop_size: 256
+  resize_strategy: resize
+  center_data: true

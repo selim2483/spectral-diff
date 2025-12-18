@@ -1,0 +1,38 @@
+==========================================
+SLURM_JOB_ID = 353207
+SLURM_JOB_NODELIST = n215
+==========================================
+
+-----------------------------------------------------
+Command=/scratchm/sollivie/spectral-diff/cpu_notebook.sbatch
+-----------------------------------------------------
+#!/bin/bash 
+
+#SBATCH --job-name=cpu_notebook
+
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=0
+#SBATCH --time=10:00:00
+#SBATCH --qos=co_long_std
+#SBATCH --output=logslurm/cpu_notebook-%A_%a.out
+#SBATCH --error=logslurm/cpu_notebook-%A_%a.err
+
+pixi run jupyter notebook --no-browser --ip=0.0.0.0 --port=8888
+-----------------------------------------------------
+StartTime=2025-12-05T15:43:51
+EndTime=2025-12-06T01:44:13
+NodeList=n215
+-----------------------------------------------------
+Job ID: 353207
+Cluster: commun
+User/Group: sollivie/dota
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:02:42
+CPU Efficiency: 0.03% of 6-16:05:52 core-walltime
+Job Wall-clock time: 10:00:22
+Memory Utilized: 174.68 MB
+Memory Efficiency: 0.09% of 188.28 GB
+-----------------------------------------------------

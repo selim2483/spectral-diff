@@ -1,0 +1,7 @@
+class_path: data.CloudyConditionalDataModule
+init_args:
+  root: /scratchm/sollivie/datasets/cloudy
+  batch_size: 8
+  num_workers: 8
+  nframes: 10
+  crop_size: 256

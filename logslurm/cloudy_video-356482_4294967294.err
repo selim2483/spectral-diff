@@ -1,0 +1,92 @@
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/fabric/utilities/seed.py:44: No seed found, seed set to 0
+[rank: 0] Seed set to 0
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.model_summary.ModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+wandb: Currently logged in as: selimollivier24 (selimollivier247) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 39f1iw6q
+wandb: Tracking run with wandb version 0.23.0
+wandb: Run data is saved locally in /scratchm/sollivie/spectral-diff/runs/cloudy_video/wandb/run-20251218_113128-39f1iw6q
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run cloudy_video
+wandb: ⭐️ View project at https://wandb.ai/selimollivier247/spectralDiff
+wandb: 🚀 View run at https://wandb.ai/selimollivier247/spectralDiff/runs/39f1iw6q
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /scratchm/sollivie/spectral-diff/runs/cloudy_video exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [1]
+
+   | Name                        | Type             | Params | Mode  | In sizes                    | Out sizes       
+---------------------------------------------------------------------------------------------------------------------------
+0  | model                       | UNet             | 82.5 M | train | ?                           | ?               
+1  | model.time_mlp              | Sequential       | 33.1 K | train | ?                           | ?               
+2  | model.time_mlp.0            | SinusoidalPosEmb | 0      | train | ?                           | ?               
+3  | model.time_mlp.1            | Linear           | 16.6 K | train | ?                           | ?               
+4  | model.time_mlp.2            | GELU             | 0      | train | ?                           | ?               
+5  | model.time_mlp.3            | Linear           | 16.4 K | train | ?                           | ?               
+6  | model.downs                 | ModuleList       | 35.1 M | train | ?                           | ?               
+7  | model.downs.0               | ModuleList       | 442 K  | train | ?                           | ?               
+8  | model.downs.1               | ModuleList       | 1.9 M  | train | ?                           | ?               
+9  | model.downs.2               | ModuleList       | 7.5 M  | train | ?                           | ?               
+10 | model.downs.3               | ModuleList       | 25.3 M | train | ?                           | ?               
+11 | model.ups                   | ModuleList       | 18.5 M | train | ?                           | ?               
+12 | model.ups.0                 | ModuleList       | 14.0 M | train | ?                           | ?               
+13 | model.ups.1                 | ModuleList       | 3.6 M  | train | ?                           | ?               
+14 | model.ups.2                 | ModuleList       | 927 K  | train | ?                           | ?               
+15 | model.mid_block1            | ConvNextBlock    | 14.2 M | train | ?                           | ?               
+16 | model.mid_block1.mlp        | Sequential       | 33.3 K | train | ?                           | ?               
+17 | model.mid_block1.ds_conv    | Conv2d           | 25.6 K | train | ?                           | ?               
+18 | model.mid_block1.net        | Sequential       | 14.2 M | train | ?                           | ?               
+19 | model.mid_block1.res_conv   | Identity         | 0      | train | ?                           | ?               
+20 | model.mid_attn              | Residual         | 263 K  | train | ?                           | ?               
+21 | model.mid_attn.fn           | PreNorm          | 263 K  | train | ?                           | ?               
+22 | model.mid_block2            | ConvNextBlock    | 14.2 M | train | ?                           | ?               
+23 | model.mid_block2.mlp        | Sequential       | 33.3 K | train | ?                           | ?               
+24 | model.mid_block2.ds_conv    | Conv2d           | 25.6 K | train | ?                           | ?               
+25 | model.mid_block2.net        | Sequential       | 14.2 M | train | ?                           | ?               
+26 | model.mid_block2.res_conv   | Identity         | 0      | train | ?                           | ?               
+27 | model.final_conv            | Sequential       | 224 K  | train | ?                           | ?               
+28 | model.final_conv.0          | ConvNextBlock    | 224 K  | train | ?                           | ?               
+29 | model.final_conv.1          | Conv2d           | 65     | train | ?                           | ?               
+30 | ema_model                   | EMA              | 82.5 M | train | [[8, 2, 256, 256], []]      | ?               
+31 | ema_model.module            | UNet             | 82.5 M | eval  | [[8, 2, 256, 256], []]      | ?               
+32 | ema_model.module.time_mlp   | Sequential       | 33.1 K | eval  | [8]                         | [8, 64]         
+33 | ema_model.module.downs      | ModuleList       | 35.1 M | eval  | ?                           | ?               
+34 | ema_model.module.ups        | ModuleList       | 18.5 M | eval  | ?                           | ?               
+35 | ema_model.module.mid_block1 | ConvNextBlock    | 14.2 M | eval  | [[8, 512, 32, 32], [8, 64]] | [8, 512, 32, 32]
+36 | ema_model.module.mid_attn   | Residual         | 263 K  | eval  | [8, 512, 32, 32]            | [8, 512, 32, 32]
+37 | ema_model.module.mid_block2 | ConvNextBlock    | 14.2 M | eval  | [[8, 512, 32, 32], [8, 64]] | [8, 512, 32, 32]
+38 | ema_model.module.final_conv | Sequential       | 224 K  | eval  | [8, 64, 256, 256]           | [8, 1, 256, 256]
+---------------------------------------------------------------------------------------------------------------------------
+164 M     Trainable params
+0         Non-trainable params
+164 M     Total params
+659.983   Total estimated model params size (MB)
+257       Modules in train mode
+256       Modules in eval mode
+SLURM auto-requeueing enabled. Setting signal handlers.
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/plotly/matplotlylib/renderer.py:564: UserWarning:
+
+I found a path object that I don't think is part of a bar chart. Ignoring.
+
+wandb: Encoding video...
+WARNING:root:Converting video data to uint8
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/plotly/matplotlylib/renderer.py:564: UserWarning:
+
+I found a path object that I don't think is part of a bar chart. Ignoring.
+
+wandb: Encoding video...
+WARNING:root:Converting video data to uint8
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/fit_loop.py:310: PossibleUserWarning:
+
+The number of training batches (6) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/loops/fit_loop.py:527: PossibleUserWarning:
+
+Found 256 module(s) in eval mode at the start of training. This may lead to unexpected behavior during training. If this is intentional, you can ignore this warning.
+
+wandb: Encoding video...
+WARNING:root:Converting video data to uint8
+wandb: Encoding video...
+WARNING:root:Converting video data to uint8
+wandb: Encoding video...
+WARNING:root:Converting video data to uint8

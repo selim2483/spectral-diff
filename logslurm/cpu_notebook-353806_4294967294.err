@@ -1,0 +1,341 @@
+[W 2025-12-09 13:33:55.325 ServerApp] jupyterlab | error adding extension (enabled: True): Unknown scheme for proxy URL URL('proxy.onera:80')
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 365, in add_extension
+        extpkg = ExtensionPackage(name=extension_name, enabled=enabled)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 219, in __init__
+        self._load_metadata()
+        ~~~~~~~~~~~~~~~~~~~^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 228, in _load_metadata
+        self.module, self.metadata = get_metadata(name, logger=self.log)
+                                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/utils.py", line 76, in get_metadata
+        return module, module._jupyter_server_extension_points()
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/__init__.py", line 20, in _jupyter_server_extension_points
+        from .labapp import LabApp
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/labapp.py", line 46, in <module>
+        from .extensions import MANAGERS as EXT_MANAGERS
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/extensions/__init__.py", line 12, in <module>
+        from .pypi import PyPIExtensionManager
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/extensions/pypi.py", line 74, in <module>
+        "http://": httpx.AsyncHTTPTransport(proxy=http_proxy_url),
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/httpx/_transports/default.py", line 296, in __init__
+        proxy = Proxy(url=proxy) if isinstance(proxy, (str, URL)) else proxy
+                ~~~~~^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/httpx/_config.py", line 214, in __init__
+        raise ValueError(f"Unknown scheme for proxy URL {url!r}")
+    ValueError: Unknown scheme for proxy URL URL('proxy.onera:80')
+[I 2025-12-09 13:33:55.330 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2025-12-09 13:33:55.333 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2025-12-09 13:33:55.336 ServerApp] notebook | extension was successfully linked.
+[W 2025-12-09 13:33:55.473 ServerApp] jupyterlab | error adding extension (enabled: True): Unknown scheme for proxy URL URL('proxy.onera:80')
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 365, in add_extension
+        extpkg = ExtensionPackage(name=extension_name, enabled=enabled)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 219, in __init__
+        self._load_metadata()
+        ~~~~~~~~~~~~~~~~~~~^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/manager.py", line 228, in _load_metadata
+        self.module, self.metadata = get_metadata(name, logger=self.log)
+                                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/extension/utils.py", line 76, in get_metadata
+        return module, module._jupyter_server_extension_points()
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/__init__.py", line 20, in _jupyter_server_extension_points
+        from .labapp import LabApp
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/labapp.py", line 46, in <module>
+        from .extensions import MANAGERS as EXT_MANAGERS
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/extensions/__init__.py", line 12, in <module>
+        from .pypi import PyPIExtensionManager
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/extensions/pypi.py", line 74, in <module>
+        "http://": httpx.AsyncHTTPTransport(proxy=http_proxy_url),
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/httpx/_transports/default.py", line 296, in __init__
+        proxy = Proxy(url=proxy) if isinstance(proxy, (str, URL)) else proxy
+                ~~~~~^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/httpx/_config.py", line 214, in __init__
+        raise ValueError(f"Unknown scheme for proxy URL {url!r}")
+    ValueError: Unknown scheme for proxy URL URL('proxy.onera:80')
+[I 2025-12-09 13:33:55.474 ServerApp] notebook_shim | extension was successfully linked.
+[I 2025-12-09 13:33:55.512 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2025-12-09 13:33:55.514 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2025-12-09 13:33:55.514 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2025-12-09 13:33:55.523 ServerApp] notebook | extension was successfully loaded.
+[I 2025-12-09 13:33:55.523 ServerApp] Serving notebooks from local directory: /scratchm/sollivie/spectral-diff
+[I 2025-12-09 13:33:55.523 ServerApp] Jupyter Server 2.17.0 is running at:
+[I 2025-12-09 13:33:55.523 ServerApp] http://spiro-n211-clu:8888/tree?token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676
+[I 2025-12-09 13:33:55.523 ServerApp]     http://127.0.0.1:8888/tree?token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676
+[I 2025-12-09 13:33:55.523 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2025-12-09 13:33:55.537 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///stck/sollivie/.local/share/jupyter/runtime/jpserver-3256156-open.html
+    Or copy and paste one of these URLs:
+        http://spiro-n211-clu:8888/tree?token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676
+        http://127.0.0.1:8888/tree?token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676
+[W 2025-12-09 13:33:55.619 ServerApp] Could not determine npm prefix: Command '['/opt/tools/bin/npm', 'prefix', '-g']' returned non-zero exit status 127.
+[I 2025-12-09 13:33:56.014 ServerApp] Skipped non-installed server(s): basedpyright, bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyrefly, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2025-12-09 13:34:19.770 ServerApp] 302 GET / (@10.33.240.8) 0.32ms
+[I 2025-12-09 13:34:19.773 JupyterNotebookApp] 302 GET /tree? (@10.33.240.8) 0.66ms
+[I 2025-12-09 13:34:20.539 ServerApp] 302 GET / (@10.33.240.8) 0.18ms
+[I 2025-12-09 13:34:20.542 JupyterNotebookApp] 302 GET /tree? (@10.33.240.8) 0.24ms
+[I 2025-12-09 13:34:23.580 ServerApp] 302 GET / (@10.33.240.8) 0.20ms
+[I 2025-12-09 13:34:23.582 JupyterNotebookApp] 302 GET /tree? (@10.33.240.8) 0.23ms
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: module 'psutil' has no attribute 'net_if_addrs'
+  ret = f(**kwargs)
+[I 2025-12-09 13:34:23.630 ServerApp] Kernel started: 7d0ef8ab-8df4-48e3-985e-306eed3ae054
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[I 2025-12-09 13:34:26.623 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (1/5), new random ports
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[I 2025-12-09 13:34:29.640 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (2/5), new random ports
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[I 2025-12-09 13:34:32.656 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (3/5), new random ports
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[I 2025-12-09 13:34:35.672 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (4/5), new random ports
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[I 2025-12-09 13:34:38.688 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (5/5), new random ports
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel_launcher.py", line 16, in <module>
+    from ipykernel import kernelapp as app
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 21, in <module>
+    from IPython.core.application import (  # type:ignore[attr-defined]
+    ...<4 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/__init__.py", line 57, in <module>
+    from .terminal.embed import embed
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/terminal/embed.py", line 15, in <module>
+    from IPython.core.interactiveshell import InteractiveShell, make_main_module_type
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 70, in <module>
+    from IPython.core.displayhook import DisplayHook
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/displayhook.py", line 19, in <module>
+    from .history import HistoryOutput
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/IPython/core/history.py", line 20, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+[W 2025-12-09 13:34:41.705 ServerApp] AsyncIOLoopKernelRestarter: restart failed
+[W 2025-12-09 13:34:41.705 ServerApp] Kernel 7d0ef8ab-8df4-48e3-985e-306eed3ae054 died, removing from map.
+[W 2025-12-09 13:34:45.683 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.708 ServerApp] 403 GET /api/kernelspecs?1765283685654 (@10.33.240.8) 24.98ms referer=None
+[W 2025-12-09 13:34:45.708 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.709 ServerApp] 403 GET /api/kernels?1765283685655 (@10.33.240.8) 25.71ms referer=None
+[W 2025-12-09 13:34:45.715 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.716 ServerApp] 403 GET /api/kernels?1765283685659 (@10.33.240.8) 5.68ms referer=None
+[W 2025-12-09 13:34:45.716 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.717 ServerApp] 403 GET /api/sessions?1765283685661 (@10.33.240.8) 6.27ms referer=None
+[W 2025-12-09 13:34:45.755 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.756 ServerApp] 403 GET /api/kernelspecs?1765283685716 (@10.33.240.8) 1.22ms referer=None
+[I 2025-12-09 13:34:45.756 ServerApp] 302 GET / (@10.33.240.8) 0.21ms
+[I 2025-12-09 13:34:45.778 JupyterNotebookApp] 302 GET /tree? (@10.33.240.8) 0.45ms
+[W 2025-12-09 13:34:45.787 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.788 ServerApp] 403 GET /api/kernelspecs?1765283685784 (@10.33.240.8) 0.73ms referer=None
+[W 2025-12-09 13:34:45.792 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.793 ServerApp] 403 GET /api/kernels?1765283685785 (@10.33.240.8) 0.95ms referer=None
+[W 2025-12-09 13:34:45.793 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.793 ServerApp] 403 GET /api/kernels?1765283685787 (@10.33.240.8) 1.38ms referer=None
+[W 2025-12-09 13:34:45.795 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.796 ServerApp] 403 GET /api/sessions?1765283685789 (@10.33.240.8) 0.79ms referer=None
+[W 2025-12-09 13:34:45.798 ServerApp] wrote error: 'Forbidden'
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1846, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 3363, in wrapper
+        url = self.get_login_url()
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/base/handlers.py", line 786, in get_login_url
+        raise web.HTTPError(403)
+    tornado.web.HTTPError: HTTP 403: Forbidden
+[W 2025-12-09 13:34:45.799 ServerApp] 403 GET /api/kernelspecs?1765283685791 (@10.33.240.8) 1.24ms referer=None
+[W 2025-12-09 13:35:23.680 ServerApp] Timeout waiting for kernel_info reply from 7d0ef8ab-8df4-48e3-985e-306eed3ae054
+[E 2025-12-09 13:35:23.680 ServerApp] Uncaught exception GET /api/kernels/7d0ef8ab-8df4-48e3-985e-306eed3ae054/channels?session_id=1e88692e-d6d5-4a75-9de6-7d9697ccba14&token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676 (10.33.240.8)
+    HTTPServerRequest(protocol='http', host='spiro-n211-clu:8888', method='GET', uri='/api/kernels/7d0ef8ab-8df4-48e3-985e-306eed3ae054/channels?session_id=1e88692e-d6d5-4a75-9de6-7d9697ccba14&token=96e07c390b5fadf2f714b1d5ef44639aa374ef859a787676', version='HTTP/1.1', remote_ip='10.33.240.8')
+    Traceback (most recent call last):
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/services/kernels/websocket.py", line 66, in get
+        await super().get(kernel_id=kernel_id)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/websocket.py", line 277, in get
+        await self.ws_connection.accept_connection(self)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/websocket.py", line 890, in accept_connection
+        await self._accept_connection(handler)
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/tornado/websocket.py", line 930, in _accept_connection
+        self.selected_subprotocol = handler.select_subprotocol(subprotocols)
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+      File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyter_server/services/kernels/websocket.py", line 88, in select_subprotocol
+        preferred_protocol = self.connection.kernel_ws_protocol
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    AttributeError: 'NoneType' object has no attribute 'kernel_ws_protocol'
+[E 2025-12-09 13:35:23.687 ServerApp] {
+      "Host": "spiro-n211-clu:8888"
+    }
+[E 2025-12-09 13:35:23.687 ServerApp] 500 GET /api/kernels/7d0ef8ab-8df4-48e3-985e-306eed3ae054/channels?session_id=1e88692e-d6d5-4a75-9de6-7d9697ccba14&token=[secret] (56626a3314174f449a9d1100731c3f5b@10.33.240.8) 60046.25ms referer=None
+slurmstepd: error: *** JOB 353806 ON n211 CANCELLED AT 2025-12-09T13:36:26 ***

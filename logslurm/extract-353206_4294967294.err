@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/bin/jupyter-notebook", line 4, in <module>
+    from notebook.app import main
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/notebook/app.py", line 21, in <module>
+    from jupyterlab.commands import (  # type:ignore[import-untyped]
+    ...<3 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/__init__.py", line 8, in <module>
+    from .handlers.announcements import (
+    ...<3 lines>...
+    )
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab/handlers/announcements.py", line 16, in <module>
+    from jupyterlab_server.translation_utils import translator
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab_server/__init__.py", line 6, in <module>
+    from .app import LabServerApp
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab_server/app.py", line 15, in <module>
+    from .handlers import LabConfig, add_handlers
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab_server/handlers.py", line 21, in <module>
+    from .listings_handler import ListingsHandler, fetch_listings
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/jupyterlab_server/listings_handler.py", line 10, in <module>
+    import requests
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/requests/__init__.py", line 151, in <module>
+    from . import packages, utils
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/requests/utils.py", line 24, in <module>
+    from . import certs
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/requests/certs.py", line 14, in <module>
+    from certifi import where
+ModuleNotFoundError: No module named 'certifi'

@@ -1,0 +1,120 @@
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/fabric/utilities/seed.py:44: No seed found, seed set to 0
+[rank: 0] Seed set to 0
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.model_summary.ModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+wandb: Currently logged in as: selimollivier24 (selimollivier247) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 6pjzfp4k
+wandb: Tracking run with wandb version 0.22.2
+wandb: Run data is saved locally in /scratchm/sollivie/spectral-diff/runs/cloudy_image_512/wandb/run-20251128_114307-6pjzfp4k
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run cloudy_image_512
+wandb: ⭐️ View project at https://wandb.ai/selimollivier247/spectralDiff
+wandb: 🚀 View run at https://wandb.ai/selimollivier247/spectralDiff/runs/6pjzfp4k
+/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /scratchm/sollivie/spectral-diff/runs/cloudy_image_512 exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Traceback (most recent call last):
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/image.py", line 70, in <module>
+    cli_main()
+    ~~~~~~~~^^
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/image.py", line 66, in cli_main
+    cli = CustomCLI(
+        Diffusion, save_config_kwargs={"overwrite": True})
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 414, in __init__
+    self._run_subcommand(self.subcommand)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/cli.py", line 747, in _run_subcommand
+    fn(**fn_kwargs)
+    ~~^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/trainer.py", line 991, in _run
+    call._call_callback_hooks(self, "on_fit_start")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/trainer/call.py", line 228, in _call_callback_hooks
+    fn(trainer, trainer.lightning_module, *args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_summary.py", line 64, in on_fit_start
+    model_summary = self._summary(trainer, pl_module)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_summary.py", line 86, in _summary
+    return summarize(pl_module, max_depth=self._max_depth)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 515, in summarize
+    return ModelSummary(lightning_module, max_depth=max_depth)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 217, in __init__
+    self._layer_summary = self.summarize()
+                          ~~~~~~~~~~~~~~^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 301, in summarize
+    self._forward_example_input()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py", line 334, in _forward_example_input
+    model(input_)
+    ~~~~~^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/diffusion/diffusion.py", line 62, in forward
+    output = self.ema_model(img, t).sample
+             ~~~~~~~~~~~~~~^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1829, in inner
+    result = forward_call(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/models/modules.py", line 62, in forward
+    return self.module(*args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1829, in inner
+    result = forward_call(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/models/unet.py", line 110, in forward
+    x = convnext(x, t)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1829, in inner
+    result = forward_call(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/src/spectral_diff/models/modules.py", line 152, in forward
+    h = self.ds_conv(x)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1829, in inner
+    result = forward_call(*args, **kwargs)
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratchm/sollivie/spectral-diff/.pixi/envs/default/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 543, in _conv_forward
+    return F.conv2d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Given groups=2, weight of size [2, 1, 7, 7], expected input[8, 1, 256, 256] to have 2 channels, but got 1 channels instead
