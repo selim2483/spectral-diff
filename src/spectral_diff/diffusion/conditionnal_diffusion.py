@@ -46,7 +46,7 @@ class ConditionalDiffusion(Diffusion):
             self, start_frame: torch.Tensor, nframes: int = 10, 
             custom_timesteps: int = None):
         samples = [start_frame]
-        for _ in range(1, nframes + 1):
+        for _ in range(1, nframes):
             next_frame = self.conditional_sample(
                 samples[-1], custom_timesteps=custom_timesteps)
             samples.append(next_frame)

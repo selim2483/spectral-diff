@@ -1,3 +1,4 @@
 from .augmented_data import AugmentedDataModule
-from .conditional_data import CloudyDataModule
+from .cloudy import CloudyImageDataModule
+from .cloudy_conditional import CloudyConditionalDataModule
 from .single_image import SingleImageDataModule

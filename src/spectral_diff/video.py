@@ -5,7 +5,7 @@ from diffusers.schedulers.scheduling_ddpm import DDPMScheduler
 from diffusers.models.unets import UNet2DModel
 from jsonargparse import lazy_instance
 
-from data import CloudyDataModule
+from data import CloudyConditionalDataModule
 from diffusion import ConditionalDiffusion
 from models.unet import UNet 
 
@@ -15,9 +15,9 @@ class CustomCLI(LightningCLI):
             'model.model': lazy_instance(UNet, dim=32, out_dim=3, channels=6), 
             'model.scheduler': lazy_instance(DDPMScheduler),
             'data': lazy_instance(
-                CloudyDataModule, 
+                CloudyConditionalDataModule, 
                 root='/tmp_user/juno/sollivie/datasets/cloudy',
-                nframes=10, batch_size=1, num_workers=1),
+                crop_size=256, nframes=10, batch_size=1, num_workers=1),
             'trainer.max_steps': 50_000,
             'trainer.val_check_interval': 5_000,
             'trainer.check_val_every_n_epoch': None,

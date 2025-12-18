@@ -6,8 +6,8 @@ precision: null
 logger:
   class_path: lightning.pytorch.loggers.WandbLogger
   init_args:
-    name: tissu
-    save_dir: /tmp_user/juno/sollivie/spectral-diff/runs/tissu
+    name: cloudy_video
+    save_dir: /scratchm/sollivie/spectral-diff/runs/cloudy_video
     version: null
     offline: false
     dir: null
@@ -44,13 +44,14 @@ callbacks:
       max_depth: 3
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/tissu
+      dirpath: /scratchm/sollivie/spectral-diff/runs/cloudy_video
       filename: 'model-{step}'
       save_last: True
       every_n_train_steps: 10_000
       save_top_k: -1
-  - class_path: utils.logging.LogMetricsCallback
-  - class_path: utils.logging.LogImagesSampleCallback
+  # - class_path: utils.logging.LogMetricsCallback
+  # - class_path: utils.logging.LogImagesSampleCallback
+  - class_path: utils.logging.LogVideoSampleCallback
 fast_dev_run: false
 max_epochs: null
 min_epochs: null

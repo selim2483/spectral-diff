@@ -15,20 +15,6 @@ from lightning.pytorch.callbacks import Callback, ModelCheckpoint
 from texture_metrics.criteria.fourier import radial_profile
 from metrics import _metric_dict, MetricsOptions
 
-@dataclass
-class LoggingOptions:
-    loggings: list = field(default_factory=list)
-    image_viz: Sequence[str] = field(
-        default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
-    gif_fps: int = 4
-    plt_kwargs: Sequence[int] = field(default_factory=dict)
-    # video_viz: Sequence[str] = field(
-    #     default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
-
-DEFAULT_IMAGE_LOGGING_OPTIONS = LoggingOptions(
-    loggings=['make_grid_image', 'plot_radiale_profile'])
-DEFAULT_VIDEO_LOGGING_OPTIONS = LoggingOptions(
-    loggings=['random_slice', 'plot_vertical_profile', 'make_animation'])
 DEFAULT_IMAGES_TO_SHOW = ['samples', 'log_sp', 'diff_sp']
 DEFAULT_METRICS_OPTIONS = MetricsOptions(
     metrics=[
@@ -36,6 +22,30 @@ DEFAULT_METRICS_OPTIONS = MetricsOptions(
         'sliced_wasserstein_distance', 
         'spectral_radial_distance',
         'gradients_distance'
+    ]
+)
+DEFAULT_NEXT_FRAME_DELTAS = [1,5]
+
+@dataclass
+class LoggingOptions:
+    loggings: list = field(default_factory=list)
+    image_viz: Sequence[str] = field(
+        default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
+    gif_fps: int = 4
+    next_frame_deltas: Sequence[int] = field(
+        default_factory=lambda: DEFAULT_NEXT_FRAME_DELTAS)
+    plt_kwargs: dict = field(default_factory=dict)
+    # video_viz: Sequence[str] = field(
+    #     default_factory=lambda: DEFAULT_IMAGES_TO_SHOW)
+
+DEFAULT_IMAGE_LOGGING_OPTIONS = LoggingOptions(
+    loggings=['make_grid_image', 'plot_radial_profile'])
+DEFAULT_VIDEO_LOGGING_OPTIONS = LoggingOptions(
+    loggings=[
+        'log_random_frame', 
+        'plot_vertical_profile', 
+        'make_animation',
+        'predict_next_frame'
     ]
 )
 
@@ -143,7 +153,30 @@ def make_grid_single_image(
 def make_grid_multiple_images(
         target: torch.Tensor, sample: torch.Tensor, 
         images_to_show: Sequence[str] = DEFAULT_IMAGES_TO_SHOW):
-    raise NotImplementedError
+    imgs = {}
+    if 'samples' in images_to_show:
+        tnsrs = torch.cat([target, sample])
+        grid = make_grid(
+            tnsrs, nrow=sample.shape[0], normalize=True, value_range=(-1,1))
+        imgs['samples'] = imlog(grid)
+    if 'nn_patch' in images_to_show:
+        pass
+    if 'log_sp' in images_to_show:
+        target_sp = torch.fft.fftshift(
+            torch.fft.fft2(target.mean(dim=-3)).abs().log(), dim=(-1, -2))
+        sample_sp = torch.fft.fftshift(
+            torch.fft.fft2(sample.mean(dim=-3)).abs().log(), dim=(-1, -2))
+        diff_sp = (sample_sp - target_sp).abs()
+
+        log_sp = torch.cat((target_sp, sample_sp, diff_sp))
+        log_sp = (log_sp - log_sp.min()) / (log_sp.max() - log_sp.min())
+        log_sp = np.apply_along_axis(cm.viridis, 0, log_sp.cpu().numpy())
+        log_sp = torch.from_numpy(np.squeeze(log_sp))
+        grid_sp = make_grid(log_sp, nrow=sample.shape[0])
+        # grid_sp = apply_colormap(grid_sp)
+        imgs['spectrum'] = imlog(grid_sp[..., :3, :, :])
+
+    return imgs
 
 @register_logging
 def make_grid_image(
@@ -200,9 +233,13 @@ class LogImagesSampleCallback(Callback):
             outputs: dict, batch: dict, batch_idx: int, 
             dataloader_idx: int = 0):
         
-        mu = batch.get('mean')
-        target = batch.get('images') + mu
-        sample = outputs.get('sample') + mu
+        target = batch.get('images')
+        sample = outputs.get('sample')
+        mu = batch.get('mean', torch.zeros_like(target))
+        if mu.ndim < batch.get('images').ndim:
+            mu.unsqueeze_(1)
+        target += mu
+        sample += mu
 
         for logging in self.options.loggings:
             output = _logging_dict[logging](target, sample, self.options)
@@ -213,11 +250,11 @@ class LogImagesSampleCallback(Callback):
 @register_logging
 def log_random_frame(
         target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
-    idx = random.randint(1,target.shape[1])
+    idx = random.randint(1,target.shape[1] - 1)
     target_frame = target[:,idx,:,:].unsqueeze(1)
     sample_frame = sample[:,idx,:,:].unsqueeze(1)
     grid = make_grid_image(target_frame, sample_frame, options)
-    return {'random slice samples': grid[:,idx,:,:]}
+    return grid
 
 @register_logging
 def plot_vertical_profile(
@@ -228,7 +265,7 @@ def plot_vertical_profile(
     colors = plt.cm.tab10
     fig, ax = plt.subplots(
         1, 1, figsize=options.plt_kwargs.get('figsize', (10, 10)))
-    for i in enumerate(target_profiles.shape[0]):
+    for i in range(target_profiles.shape[0]):
         c = colors(i % 10)
         ax.plot(
             target_profiles[i], label=f'target {i}', linestyle='-', color=c)
@@ -242,7 +279,7 @@ def plot_vertical_profile(
     ax.set_title('Vertical profile')
     plt.tight_layout()
 
-    return fig
+    return {'Vertical profile' : fig}
 
 @register_logging
 def make_animation(
@@ -251,8 +288,20 @@ def make_animation(
         torch.cat([target, sample]), 
         nrow=target.shape[0], normalize=True, value_range=(-1,1))
     video = wandb.Video(
-        grid.unsqueeze(1).cpu().numpy(), fps=options.gif_fps, format="gif")
+        grid.unsqueeze(1).expand(-1,3,-1,-1).cpu().numpy(), fps=options.gif_fps, format="gif")
     return {'animation': video}
+
+@register_logging
+def predict_next_frame(
+    target: torch.Tensor, sample: torch.Tensor, options: LoggingOptions):
+    target, sample = target.cpu(), sample.cpu()
+    frames_idx = [0] + options.next_frame_deltas
+    b, c, h, w = sample.shape
+    frames = sample[:,frames_idx,:,:]
+    frames = frames.transpose(0,1)
+    frames = frames.reshape(b*len(frames_idx), 1, h, w)
+    grid = make_grid(frames, nrow=b, normalize=True, value_range=(-1,1))
+    return {'predict_next_frame': imlog(grid)}
 
 class LogVideoSampleCallback(LogImagesSampleCallback):
 
@@ -275,6 +324,8 @@ class LogMetricsCallback(Callback):
             dataloader_idx: int = 0):
         
         mu = batch.get('mean')
+        if mu.ndim < batch.get('images').ndim:
+            mu.unsqueeze_(1)
         target = batch.get('images') + mu
         sample = outputs.get('sample') + mu
 

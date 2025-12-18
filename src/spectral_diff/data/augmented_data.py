@@ -10,6 +10,8 @@ import torchvision.transforms.functional as TF
 from PIL import Image
 from lightning.pytorch import LightningDataModule
 
+from utils.image import center_image
+
 DEFAULT_SCALE = (.25, .75)
 DEFAULT_ANGLE = (0., 2 * math.pi)
 DEFAULT_CROP_SIZE = 256
@@ -70,7 +72,9 @@ class AugmentedSet(Dataset):
     
     def __getitem__(self, index):
         img = Image.open(self.image_paths[index]).convert('RGB')
-        return {'IMG': self.transform(img)}
+        img = self.transform(img)
+        img, mean = center_image(img)
+        return {'images': img, 'mean': mean}
     
 class AugmentedDataModule(LightningDataModule):
     def __init__(

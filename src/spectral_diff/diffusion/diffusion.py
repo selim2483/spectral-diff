@@ -25,7 +25,7 @@ class Diffusion(L.LightningModule):
         self.set_example_input_array()
 
     def set_example_input_array(self):
-        self.example_input_array = torch.Tensor(8, 3, 256, 256)
+        self.example_input_array = torch.Tensor(8, 1, 256, 256)
     
     def training_step(self, batch, batch_idx):
         x0 = batch["images"]

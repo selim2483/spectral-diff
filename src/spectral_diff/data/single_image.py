@@ -6,7 +6,7 @@ from torch.utils.data import Dataset, IterableDataset, DataLoader
 from torchvision.transforms import transforms
 from lightning.pytorch import LightningDataModule
 
-from utils.image import imread
+from utils.image import imread, center_image
 
 CROP_RATIO = .25
 USE_FLIP = True
@@ -49,13 +49,7 @@ class CropSet(IterableDataset):
         ]
 
         self.transform = transforms.Compose(transform_list)
-
-        if center_data:
-            self.mean = image.squeeze(0).mean(dim=(-1,-2), keepdim=True)
-        else:
-            self.mean = torch.zeros_like(image.squeeze(0))
-            
-        self.img = image - self.mean
+        self.img, self.mean = center_image(image, center=center_data)
         
     def __iter__(self):
         # If the training is multi-image, choose one of them to get
@@ -91,20 +85,12 @@ class SingleSet(Dataset):
                 to avoid overhead from pytorch_lightning.
         """
         self.dataset_size = dataset_size
-
-        if center_data:
-            self.mean = image.squeeze(0).mean(dim=(-1,-2), keepdim=True)
-        else: 
-            self.mean = torch.zeros_like(image.squeeze(0))
-
-        self.img = image - self.mean
+        self.img, self.mean = center_image(image, center=center_data)
 
     def __len__(self):
         return self.dataset_size
 
     def __getitem__(self, item):
-        # If the training is multi-image, choose one of them to get
-        # the crop from
         img = self.img if len(self.img.shape) == 3 else random.choice(self.img)
         return {'images': img, 'mean': self.mean}
     

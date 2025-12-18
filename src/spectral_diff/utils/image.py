@@ -102,3 +102,13 @@ def tensor2npimg(x, vmin=-1, vmax=1, normmaxmin=False, to_numpy=True):
 
 
 torch255tonpimg = lambda x: x[0].add(0.5).clamp(0, 255).permute(1, 2, 0).to('cpu', torch.uint8).numpy()
+
+def center_image(img: torch.Tensor, center: bool = True):
+    if center:
+        mean = img.squeeze().mean(dim=(-1,-2), keepdim=True)
+    else: 
+        mean = torch.zeros_like(img.squeeze())
+
+    img = img - mean
+
+    return img, mean

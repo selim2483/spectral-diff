@@ -51,11 +51,11 @@ class MetricsOptions:
     # Number of slices for SWD.
     nhist:        int  = 1000
     # SWD batch size.
-    bhist:        int  = 250
+    bhist:        int  = 100
     # Number of slices for SWD on gradients images.
     ngrad:        int  = 1000
     # Gradients SWD batch size.
-    bgrad:        int  = 250
+    bgrad:        int  = 100
     
     # Model Options to use as a CNN for deep features extraction and style
     # distances computation
