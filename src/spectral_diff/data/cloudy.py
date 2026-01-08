@@ -1,5 +1,6 @@
 from pathlib import Path
 import random
+import h5py
 import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision.transforms import transforms
@@ -53,6 +54,52 @@ class CloudyImageSet(Dataset):
             frame_idx = image.shape[0] // 2 
 
         img = image[frame_idx].unsqueeze(0)
+        img = self.transform(img)
+        img, mean = center_image(img, center=self.center_data)
+
+        return {'images': img, 'mean': mean}
+    
+class CloudyHDF5ImageSet(Dataset):
+    def __init__(
+            self, root: Path, crop_size: int, 
+            resize_strategy: str = 'random_crop', random: bool = True,
+            center_data: bool = True):
+        self.root = root
+        self.crop_size = crop_size
+        self.resize_strategy = resize_strategy
+        self.random = random
+        self.center_data = center_data
+
+        self.hf = h5py.File(self.root, 'r')
+        # self._cube_sizes = {grp: len(self.hf[grp]) for grp in (self.hf.keys())}
+
+        if self.resize_strategy.lower() == 'crop':
+            if random:
+                resize_transform = transforms.RandomCrop(self.crop_size)
+            else:
+                resize_transform = transforms.CenterCrop(self.crop_size)
+        elif self.resize_strategy.lower() == 'resize':
+            resize_transform = transforms.Resize(
+                (self.crop_size, self.crop_size))
+
+        self.transform = transforms.Compose([
+            resize_transform,  
+            transforms.Normalize((.5), (.5))
+        ])
+
+    def __len__(self):
+        return len(self.hf)
+
+    def __getitem__(self, index):
+        grp = self.hf[index]
+        nz = len(grp)
+        
+        if self.random:
+            frame_idx = random.randint(0, nz - 1)
+        else:
+            frame_idx = nz // 2 
+
+        img = grp[f'frame_{frame_idx:03}'].unsqueeze(0)
         img = self.transform(img)
         img, mean = center_image(img, center=self.center_data)
 

@@ -46,7 +46,7 @@ trainer:
         max_depth: 3
     - class_path: lightning.pytorch.callbacks.ModelCheckpoint
       init_args:
-        dirpath: /tmp_user/juno/sollivie/spectral-diff/runs/test
+        dirpath: /scratchm/sollivie/spectral-diff/runs/test
         filename: 'model-{step}'
         save_last: True
         every_n_train_steps: 10_000
@@ -90,7 +90,7 @@ model: null
 data:
   class_path: data.SingleImageDataModule
   init_args:
-    image_path: /tmp_user/juno/sollivie/datasets/DeepTextures/tissu.png
+    image_path: /scratchm/sollivie/datasets/DeepTextures/tissu.png
     batch_size: 1
     num_workers: 1
     crop_ratio: 0.25

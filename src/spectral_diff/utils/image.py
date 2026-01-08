@@ -1,9 +1,12 @@
 import os
 from pathlib import Path
+from typing import Sequence
 
 import numpy as np
 import torch
 from PIL import Image
+
+from torchvision.transforms import transforms
 
 
 __all__ = ['to_numpy', 'np2pt', 'pt2np', 'imread', 'imwrite', 'imshow']

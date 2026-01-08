@@ -219,7 +219,9 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+*
 runs/
 wandb/
 .vscode/
 logslurm/
+src/spectral_diff/read_speed_test.py
